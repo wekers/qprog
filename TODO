@@ -1,8 +1,7 @@
-Remember last used port
 Remember recently opened files
 Enable verify after program
 Chip info browser/editor
 Allow submission of chip info
-Test on windows
 look into showing numeric progress in progress dialogs
 save date of last chip info update in settings
+change "Chip Info" menu to "Device Library"
