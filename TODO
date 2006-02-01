@@ -1,4 +1,4 @@
-Enable verify after program
+Save check box states
 Chip info browser/editor
 Allow submission of chip info
 look into showing numeric progress in progress dialogs
@@ -8,3 +8,6 @@ Support drop target event in OSX
 Figure out how to send hex to a new text editor window in OSX
 Detect file change events and reprogram
 Include libqt as a framework in OSX distribution bundle
+OSX: Provide a service for programming text
+Better error messages
+Browse button should open directory of currently selected file
