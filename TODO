@@ -10,4 +10,3 @@ Detect file change events and reprogram
 Include libqt as a framework in OSX distribution bundle
 OSX: Provide a service for programming text
 Better error messages
-Browse button should open directory of currently selected file
