@@ -9,4 +9,4 @@ Figure out how to send hex to a new text editor window in OSX
 Detect file change events and reprogram
 Include libqt as a framework in OSX distribution bundle
 OSX: Provide a service for programming text
-Better error messages
+Better error messages and handling
