@@ -1,7 +1,10 @@
-Remember recently opened files
 Enable verify after program
 Chip info browser/editor
 Allow submission of chip info
 look into showing numeric progress in progress dialogs
 save date of last chip info update in settings
 change "Chip Info" menu to "Device Library"
+Support drop target event in OSX
+Figure out how to send hex to a new text editor window in OSX
+Detect file change events and reprogram
+Include libqt as a framework in OSX distribution bundle
