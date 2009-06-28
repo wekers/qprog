@@ -17,7 +17,7 @@
 #include <QSettings>
 #include <QTextStream>
 
-#include "delegate.h"
+#include "../include/delegate.h"
 #include "mainwindow.h"
 #include "centralwidget.h"
 
@@ -40,7 +40,7 @@ MainWindow::MainWindow() : buffer(NULL)
 #endif
 
 	QMenu *deviceInfoMenu = menuBar()->addMenu("Device Info");
-	deviceInfoMenu->addAction("Update", this, SLOT(updateDeviceInfo()))->setStatusTip("Update the Device Info");
+	//deviceInfoMenu->addAction("Update", this, SLOT(updateDeviceInfo()))->setStatusTip("Update the Device Info");
 	deviceInfoMenu->addAction("Update From File", this, SLOT(updateDeviceInfoFromFile()))->setStatusTip("Update the Device Info from a file");
 
 //	chipinfoMenu->addAction(updateInfoAct);
