@@ -14,7 +14,7 @@
 #include <QTextStream>
 
 #include "centralwidget.h"
-#include "delegate.h"
+#include "../include/delegate.h"
 #include "mainwindow.h"
 
 #define	POST_STARTUP_DID_FINISH	qApp->postEvent(this, new QEvent((QEvent::Type)Delegate::StartupDidFinish), Qt::LowEventPriority)
@@ -99,7 +99,7 @@ void Delegate::getDeviceInfo()
     progressDialog->setMinimumDuration(0);
     progressDialog->setModal(true);
     progressDialog->show();		//Force the dialog to open immediately
-    connect(progressDialog, SIGNAL(canceled()), this, SLOT(cancelDownload()));
+    connect(progressDialog, SIGNAL(canceled()), this, SLOT(httpCancel()));
 
     if( !http )
     {
@@ -188,14 +188,14 @@ void Delegate::httpRequestFinished(int requestId, bool error)
     }
     //	settings.endGroup();
 
-    httpCleanup();
-
+    
     QMessageBox msgBox;
     msgBox.setText("Download Successful");
     msgBox.setInformativeText(tr("Retrieved %1 bytes").arg(buffer->size()));
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.exec();
+    httpCleanup();
     
     POST_STARTUP_DID_FINISH;
 }
