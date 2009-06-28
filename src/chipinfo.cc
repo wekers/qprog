@@ -13,7 +13,7 @@
 */
 
 #include <iostream>
-
+#include <stdlib.h>
 #include "chipinfo.h"
 
 namespace chipinfo
