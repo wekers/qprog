@@ -12,7 +12,7 @@
  * */
 #include <fcntl.h>
 #include <iostream>
-
+#include <string>
 #include "kitsrus.h"
 #include "intelhex.h"
 
@@ -59,22 +59,47 @@ namespace kitsrus
 	//Do a hard reset of the device
 	bool kitsrus_t::hard_reset()
 	{
-		set_dtr();		//Set DTR high
+	
+	static bool set_d   = true;
+	static bool clear_d = false;
+	static std::string kitName;
+	
+	
+		set_dtr(set_d);		//Set DTR high or low in K149
+		
 #ifdef	Q_WS_WIN	//Deal with win32 stupidity
 		Sleep(100);
 #else
 		usleep(10);		//Delay
 #endif
-		clear_dtr();	//Set DTR low
+		clear_dtr(clear_d);	//Set DTR low or high in K149
 
 		if( read()=='B' )
 		{
-	    firmware = read();	//Ignore the firmware type
-	    qDebug("Found Firmware Type=%X '%s'\n", firmware, firmwareName());
-			return true;
+		    firmware = read();	//Ignore the firmware type
+		    qDebug("Found Firmware Type=%X '%s'\n", firmware, firmwareName());
+		
+		    if( (firmwareName() == "Kit 149B") || (firmwareName() == "Kit 149A") && (kitName != firmwareName() ) )	
+		    {
+			    set_d   = false;		
+			    clear_d = true;
+		    }
+		    else if( (firmwareName() != "Kit 149B") || (firmwareName() != "Kit 149A") && (kitName != firmwareName() ) )
+		    {
+			    set_d   = true; 
+			    clear_d = false;
+		    }		
+		
+		    if(kitName != firmwareName())
+		    {
+			    kitName = firmwareName();
+			    hard_reset();
+		    }
+		
+		    return true;
 		}
 		else
-			return false;
+		    return false;
 	}
 
 	bool kitsrus_t::init_program_vars()
@@ -473,9 +498,9 @@ namespace kitsrus
 	//	This function is only used to set the firmware type for reset purposes
 	//	Once the programmer has been reset, get_version() should be used to get the real
 	//		firmware type
-	void kitsrus_t::set_149()
-	{
-		firmware = KIT_149A;
-	}
+	//void kitsrus_t::set_149()
+	//{
+	//	firmware = KIT_149A;
+	//}
 
 }	//namespace pocket
