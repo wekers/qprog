@@ -15,7 +15,7 @@
 #include "carbon_cocoa.h"
 #endif	//Q_OS_DARWIN
 
-#include "delegate.h"
+#include "../include/delegate.h"
 #include "mainwindow.h"
 
 Delegate delegate;
