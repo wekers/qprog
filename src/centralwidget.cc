@@ -275,7 +275,7 @@ bool do_reset(kitsrus::kitsrus_t &programmer)
 	{
 //		std::cout << "Hard reset failed. Trying a K149 reset...\n";
 		//Try assuming that the programmer is a Kit149
-		programmer.set_149();
+		//programmer.set_149();
 		if(!programmer.hard_reset())
 		{
 			QMessageBox::critical(0, "Error", "Could not reset programmer");
@@ -294,7 +294,7 @@ bool do_reset(kitsrus::kitsrus_t &programmer)
 
 bool do_erase(kitsrus::kitsrus_t &programmer)
 {
-//	programmer.chip_power_on();		//Activate programming voltages
+	programmer.chip_power_on();		//Activate programming voltages
 	if( !programmer.erase_chip() )	//Erase the chip first
 	{
 		QMessageBox::critical(0, "Error", "Could not erase part");
@@ -507,6 +507,9 @@ void CentralWidget::program_all()
 			return;
 		}
 	}
+	
+	QMessageBox::information(this, "Information", "Programming Complete.");
+	
 	if( VerifyCheckBox->isChecked() )
 		onVerify();
 }
@@ -674,7 +677,7 @@ void CentralWidget::onVerify()
 void CentralWidget::bulk_erase()
 {
 	chipinfo::chipinfo	chip_info;
-	QString	target(TargetType->itemData(TargetType->currentIndex()).toString());
+	QString	target(TargetType->itemText(TargetType->currentIndex()));
 	
 	//Load the chip info from the settings
 	if( !loadChipInfo(target, chip_info) )
