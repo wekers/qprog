@@ -102,8 +102,8 @@ namespace kitsrus
 			return c;
 		}
 		//These two are inverted when using a K149
-		void	set_dtr()	{	com.setDtr((firmware!=KIT_149A) && (firmware!=KIT_149B));	}
-		void	clear_dtr()	{	com.setDtr((firmware==KIT_149A) || (firmware==KIT_149B));	}
+		void	set_dtr(bool set)	{	com.setDtr(set);	}
+		void	clear_dtr(bool set)	{	com.setDtr(set);	}
 
 		kitsrus_t(const kitsrus_t&);	//No copy
 		void	close()	{	com.close();	}
@@ -174,7 +174,7 @@ public:
 		rom_size_type	get_rom_size() {return info.rom_size; }
 		eeprom_size_type	get_eeprom_size() {return info.eeprom_size; }
 		uint32_t	get_eeprom_start() {return info.get_eeprom_start(); }
-		void	set_149();	//Ugly kludge to work around the K149 reset logic
+		//void	set_149();	//Ugly kludge to work around the K149 reset logic
 	};
 
 }	//namespace kitsrus
